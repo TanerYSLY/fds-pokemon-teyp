@@ -9,7 +9,7 @@ the training data only, so nothing from the test set leaks into them.
 
 import pandas as pd
 
-from src.features_teammate import teammate_features
+from src.submission_best_features_teammate import teammate_features
 
 STATS = ["base_hp", "base_atk", "base_def", "base_spa", "base_spd", "base_spe"]
 BOOSTS = ["atk", "def", "spa", "spe"]  # we left out spd boosts, they show up in less than 1% of turns

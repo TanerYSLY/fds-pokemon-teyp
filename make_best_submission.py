@@ -1,7 +1,5 @@
 """Builds our best submission: logistic regression + HistGradientBoosting, weights 2:1.
 
-    python make_submission.py            # data in data/
-    python make_submission.py <folder>   # data somewhere else (e.g. on Kaggle)
 """
 
 import os
@@ -14,9 +12,9 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # so "src" can be imported from anywhere
-from src.features import (build_features, load_healing_moves, load_identity_vocab, load_species,
+from src.submission_best_features import (build_features, load_healing_moves, load_identity_vocab, load_species,
                           load_type_chart, select_features)
-from src.features_teammate import build_pokedex, load_setup_moves
+from src.submission_best_features_teammate import build_pokedex, load_setup_moves
 
 data = sys.argv[1] if len(sys.argv) > 1 else "data"
 train = pd.read_json(os.path.join(data, "train.jsonl"), lines=True)
