@@ -25,6 +25,7 @@ We compared everything with 5-fold CV repeated 3 times. CV accuracy:
 - `src/submission_best_features.py` - our features
 - `src/submission_best_features_teammate.py` - Enes's features
 - `src/validation.py` - the CV setup
+- `experiments.ipynb` - jupyter notebook about experiments
 - `make_best_submission.py` - trains both models and writes `submission.csv`
 
 ## Running it
@@ -33,7 +34,7 @@ Put `train.jsonl`, `test.jsonl` and `type_chart_gen2.csv` in a `data/` folder, t
 
 ```
 pip install -r requirements.txt
-python make_submission.py
+python make_best_submission.py
 ```
 
-It takes a few minutes. You can also pass the data folder: `python make_submission.py /kaggle/input/<competition>`.
+It takes a few minutes. You can also pass the data folder: `python make_best_submission.py /kaggle/input/<competition>`.
