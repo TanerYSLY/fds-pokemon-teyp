@@ -22,10 +22,10 @@ We compared everything with 5-fold CV repeated 3 times. CV accuracy:
 
 ## Files
 
-- `src/features.py` - our features
-- `src/features_teammate.py` - Enes's features
+- `src/submission_best_features.py` - our features
+- `src/submission_best_features_teammate.py` - Enes's features
 - `src/validation.py` - the CV setup
-- `make_submission.py` - trains both models and writes `submission.csv`
+- `make_best_submission.py` - trains both models and writes `submission.csv`
 
 ## Running it
 
