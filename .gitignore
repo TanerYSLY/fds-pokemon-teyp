@@ -3,3 +3,9 @@ __pycache__/
 .ipynb_checkpoints/
 data/
 *.csv
+
+# report sources and working notes (kept local)
+/fds_rapor_template/
+/FEATURES.md
+/MODELS.md
+/UPDATES.md
