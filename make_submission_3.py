@@ -1,15 +1,6 @@
 """
 Submission 3: Logistic Regression + CatBoost soft-voting ensemble.
 
-Pipeline
---------
-1. Load the competition data and build features (src/submission_3_features.py).
-2. Build the soft-voting ensemble with the hyperparameters and ensemble
-   weights listed in BEST_PARAMS (see the note there on how they were found).
-3. Report the 5-fold stratified CV accuracy on train.jsonl.
-4. Fit the ensemble on the full training set and predict the test set.
-5. Write the predictions in the sample_submission.csv format.
-
 Usage
 -----
     python make_submission_3.py                       # auto-detects Kaggle vs local paths
@@ -114,7 +105,7 @@ data_dir = args.data_dir or (KAGGLE_DATA_DIR if on_kaggle else COMPETITION_DIR)
 output_dir = args.output_dir or ("/kaggle/working" if on_kaggle else ".")
 os.makedirs(output_dir, exist_ok=True)
 
-# 1. Data + features
+# Data + features
 train_data = load_jsonl(os.path.join(data_dir, "train.jsonl"))
 test_data = load_jsonl(os.path.join(data_dir, "test.jsonl"))
 type_chart = load_type_chart(os.path.join(data_dir, "type_chart_gen2.csv"))
@@ -127,10 +118,10 @@ X_train = train_df[feature_cols]
 y_train = train_df["label_player_won"]
 X_test = test_df[feature_cols]
 
-# 2. Ensemble with the tuned hyperparameters
+# Ensemble with the tuned hyperparameters
 ensemble = build_ensemble(BEST_PARAMS)
 
-# 3. Cross-validated accuracy on the training set
+# Cross-validated accuracy on the training set
 cv = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
 print(f"Evaluating the ensemble with {N_FOLDS}-fold CV...")
 scores = cross_val_score(ensemble, X_train, y_train, cv=cv, scoring="accuracy", n_jobs=-1)
@@ -138,13 +129,13 @@ print(f"Fold accuracies: {np.round(scores, 4)}")
 print(f"Mean accuracy:   {scores.mean():.4f} ± {scores.std():.4f}")
 print("-" * 50)
 
-# 4. Fit on the full training set and predict the test set
+# Fit on the full training set and predict the test set
 print("Fitting the final ensemble on the full training set...")
 ensemble.fit(X_train, y_train)
 print("Predicting the test set...")
 test_predictions = ensemble.predict(X_test)
 
-# 5. Write the submission
+# Write the submission
 sample_submission = pd.read_csv(os.path.join(data_dir, "sample_submission.csv"))
 predictions_by_id = pd.Series(test_predictions, index=test_df["battle_id"])
 submission_df = sample_submission.copy()

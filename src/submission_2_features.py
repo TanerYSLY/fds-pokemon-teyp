@@ -28,7 +28,7 @@ CLERIC_MOVES = {"healbell", "aromatherapy"}    # cure the team's status conditio
 HAZARD_CONTROL_MOVES = {"rapidspin"}           # remove entry hazards
 
 
-# 1. Data loading
+# Data loading
 def load_jsonl(file_path):
     """Read a .jsonl file (one JSON object per line) into a list of dicts."""
     data = []
@@ -53,7 +53,7 @@ def load_type_chart(type_path):
     return type_chart
 
 
-# 2. Pokédex built from the competition data
+# Pokédex built from the competition data
 def build_pokedex(dataset):
     """
     Build a {pokemon_name: details} lookup (base stats, types, ...) using
@@ -76,7 +76,7 @@ def build_pokedex(dataset):
     return pokedex
 
 
-# 3. Type-effectiveness helpers
+# Type-effectiveness helpers
 def calculate_max_multiplier(atk_types, def_types, type_chart):
     """
     Best damage multiplier an attacker can get against a defender, using the
@@ -113,7 +113,7 @@ def check_immunity(atk_types, def_types, type_chart):
     return False
 
 
-# 4. Timeline tracking
+# Timeline tracking
 @dataclass
 class SideState:
     """
@@ -235,7 +235,7 @@ def process_timeline(timeline, p1, p2, recent_start_turn):
             record_move(p2, p1, p2_move, p2_state["name"], p1_state)
 
 
-# 5. Feature groups
+# Feature groups
 def composition_features(p1_team_names, p2_revealed_names):
     """How much of P2's team is known, and whether either side has Snorlax."""
     return {
@@ -473,7 +473,7 @@ def active_matchup_features(last_p1_state, last_p2_state, p1_team_details, p2_st
     }
 
 
-# 6. Per-battle feature extraction
+# Per-battle feature extraction
 @dataclass
 class BattleContext:
     """
@@ -612,7 +612,7 @@ def extract_features(battle, pokedex, type_chart, extra_groups=None):
     return features
 
 
-# 7. Wrapper used by the make_submission scripts
+# Wrapper used by the make_submission scripts
 def build_feature_frames(train_data, test_data, type_chart, extra_groups=None):
     """
     Build the train and test feature DataFrames.
