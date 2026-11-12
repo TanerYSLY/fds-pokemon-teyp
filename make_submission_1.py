@@ -52,6 +52,6 @@ p = (2 * lr.predict_proba(select_features(X_test, "linear"))[:, 1]
      + hgb.predict_proba(select_features(X_test, "tree"))[:, 1]) / 3
 submission = pd.DataFrame({"battle_id": X_test.index, "player_won": (p > 0.5).astype(int)})
 
-out = "submission_1.csv"
+out = "submission_ens_lr2_hgb1_v5.csv"
 submission.to_csv(out, index=False)
 print(f"saved {out} ({len(submission)} rows)")

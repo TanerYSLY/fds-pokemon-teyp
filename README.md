@@ -14,6 +14,14 @@ Final result: 0.686 on the private leaderboard (0.696 public), 13th out of 47 te
 
 CV for submissions is 5-fold repeated 3 times.
 
+## Reproducibility of submission 1
+
+Submissions 2 and 3 are reproduced exactly: `make_submission_2.py` and `make_submission_3.py` give the files we uploaded.
+
+Submission 1 is not. We lost the exact version of the code that produced the file we uploaded to the competition (made in our development notebooks, on a local machine). The code in this repository uses the same features and the same models, and it gives a very close file: 79 of the 5000 test predictions are different (1.6%). Almost all of them are battles where the predicted win probability is close to 0.5. The public and private scores in the table are those of the uploaded file. We did not upload the file this code produces.
+
+We looked for the cause and could not find it. The development code we still have builds exactly the same features as the code here, and the number of different predictions stays at 79 to 87 for all the library versions we tried.
+
 ## What we did (submission 1)
 
 Each battle becomes one row of features. Most of them describe the state at turn 30: HP left, how many Pokemon fainted, status conditions, boosts of the active Pokemon, type matchups, and how strong the remaining team is. We also added 1/0 columns for the 30 most common Pokemon (is it still alive?) and the `f_` columns, the same kind of features as in submissions 2 and 3.
@@ -56,4 +64,4 @@ python make_submission_2.py --data-dir data
 python make_submission_3.py --data-dir data
 ```
 
-Each script takes a few minutes. `make_submission_1.py` takes the data folder as its first argument (for example `/kaggle/input/<competition>`), the other two take `--data-dir` and find the Kaggle folder by themselves. The submission files are written to the current folder (`/kaggle/working` on Kaggle for submissions 2 and 3): `submission_1.csv`, `lr_cat_73_features.csv` and `lr_cat_79_features_v2.csv`.
+Each script takes a few minutes. `make_submission_1.py` takes the data folder as its first argument (for example `/kaggle/input/<competition>`), the other two take `--data-dir` and find the Kaggle folder by themselves. The submission files are written to the current folder (`/kaggle/working` on Kaggle for submissions 2 and 3): `submission_ens_lr2_hgb1_v5.csv`, `lr_cat_73_features.csv` and `lr_cat_79_features_v2.csv`.
